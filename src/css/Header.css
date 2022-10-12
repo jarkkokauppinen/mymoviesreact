@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(55, 55, 55);
+  padding: 10px;
+  height: 10vh;
+}
+
+.items {
+  display: flex;
+}
+
+.logo {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background:rgb(0, 180, 150);
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 35px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.textField {
+  display: flex;
+  align-self: center;
+  min-height: 35px;
+  margin: 0 5px 0 5px;
+  border-radius: 5px;
+}
+
+.text {
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.center {
+  align-self: center;
+}

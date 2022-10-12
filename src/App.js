@@ -1,26 +1,83 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
+import Header from './components/Header'
+import Main from './components/Main'
+import Login from './components/Login'
+import SignUp from './components/SignUp'
+import MovieModal from './components/MovieModal'
 import './App.css'
 
+export const AppContext = createContext()
+
 function App() {
-  const [movie, setMovie] = useState()
-
-  const getMovie = async () => {
-    const url = process.env.REACT_APP_BASE_URL
-    const movie = await fetch(`${url}/movie/1`)
-    setMovie(await movie.json())
-  }
-
-  console.log(movie)
+  const [userID, setUserID] = useState(null)
+  const [movieList, setMovieList] = useState([])
+  const [singleMovie, setSingleMovie] = useState(null)
+  const [actors, setActors] = useState([])
+  const [ratings, setRatings] = useState(null)
+  const [search, setSearch] = useState(false)
+  const [openLogin, setOpenLogin] = useState({ open: false, form: 'login' })
+  const [openMovieModal, setOpenMovieModal] = useState({ open: false, form: '' })
+  const [openRateForm, setOpenRateForm] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  
+  const login = useRef(null)
+  const note = useRef(null)
 
   useEffect(() => {
-    getMovie()
+    openLogin.open
+    ? login.current.style.display = 'flex'
+    : login.current.style.display = 'none'
+  }, [openLogin])
+
+  useEffect(() => {
+    note.current.style.display = 'none'
   }, [])
 
   return (
-    <div>
-      mymovies
-    </div>
-  );
+    <AppContext.Provider value={{
+      userID,
+      setUserID,
+      movieList,
+      setMovieList,
+      singleMovie,
+      setSingleMovie,
+      actors,
+      setActors,
+      ratings,
+      setRatings,
+      search,
+      setSearch,
+      openLogin,
+      setOpenLogin,
+      openMovieModal,
+      setOpenMovieModal,
+      openRateForm,
+      setOpenRateForm,
+      loading,
+      setLoading,
+      setMessage,
+      note
+      }}>
+      <div className='base'>
+
+        <div className='content'>
+          <Header />
+          <Main />
+        </div>
+        
+        <div ref={login} className='sign'>
+          {openLogin.form === 'login' ? <Login /> : <SignUp />}
+        </div>
+      </div>
+
+      <div className='message' ref={note}>
+        <div className='ui negative message'>{message}</div>
+      </div>
+
+      <MovieModal />
+    </AppContext.Provider>
+  )
 }
 
 export default App

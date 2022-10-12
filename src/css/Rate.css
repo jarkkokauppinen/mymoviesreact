@@ -1,0 +1,31 @@
+.closeicon {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  padding: 5px 5px 0 0;
+}
+
+.rate {
+  display: flex;
+  justify-content: center;
+  padding: 30px 30px 20px 30px;
+}
+
+.ratechild {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gold {
+  color: rgb(251, 189, 8);
+}
+
+.stars {
+  display: flex;
+  cursor: pointer;
+}
+
+.rateButton {
+  padding-top: 20px;
+}

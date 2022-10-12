@@ -1,0 +1,50 @@
+.sideBar {
+  flex: 1;
+  border-radius: 2px;
+  margin: 20px 20px 20px 10px;
+  background: rgb(55, 55, 55);
+  position: relative;
+}
+
+.sideBarChild {
+  padding: 10px;
+}
+
+.textBlock {
+  align-self: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background:rgb(0, 180, 150);
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.results {
+  margin-top: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: rgb(0, 180, 150);
+}
+
+.quote {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.quoteInfo {
+  color: lightgray;
+}
+
+.addButton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  margin-left: -10px;
+}
