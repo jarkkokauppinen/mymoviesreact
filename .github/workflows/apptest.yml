@@ -9,9 +9,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello
-        run: |
-          echo 'Hello...'
-    # steps:
-    #   - name: Test
-    #     run: npm test
+      - name: Test
+        run: npm run test
