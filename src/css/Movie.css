@@ -84,6 +84,12 @@
   margin-right: 5px;
 }
 
+.actorRow {
+  display: flex;
+  flex-wrap: wrap;
+  color: lightgray;
+}
+
 .sideMargin {
   margin: 0 5px 0 5px;
 }

@@ -8,7 +8,7 @@ import '../css/Rate.css'
 let chosen = false
 
 const RateModal = () => {
-  const { userID, singleMovie, ratings, setRatings, openRateForm, setOpenRateForm } = useContext(AppContext)
+  const { userID, singleMovie, ratings, setRatings, setRated, openRateForm, setOpenRateForm } = useContext(AppContext)
 
   const refs = useRef([])
 
@@ -91,6 +91,8 @@ const RateModal = () => {
       raters: ratings.raters + 1
     })
 
+    setRated('true')
+
     setOpenRateForm(false)
   }
 
@@ -101,7 +103,10 @@ const RateModal = () => {
       <Icon
         className='closeicon'
         name='x'
-        onClick={() => setOpenRateForm(false)}
+        onClick={() => {
+          setOpenRateForm(false)
+          chosen = false
+        }}
       />
       
       <div className='rate'>

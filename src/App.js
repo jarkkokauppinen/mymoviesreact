@@ -14,6 +14,7 @@ function App() {
   const [singleMovie, setSingleMovie] = useState(null)
   const [actors, setActors] = useState([])
   const [ratings, setRatings] = useState(null)
+  const [rated, setRated] = useState('false')
   const [search, setSearch] = useState(false)
   const [openLogin, setOpenLogin] = useState({ open: false, form: 'login' })
   const [openMovieModal, setOpenMovieModal] = useState({ open: false, form: '' })
@@ -46,6 +47,8 @@ function App() {
       setActors,
       ratings,
       setRatings,
+      rated,
+      setRated,
       search,
       setSearch,
       openLogin,

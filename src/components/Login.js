@@ -5,10 +5,15 @@ import url from '../url'
 import '../css/Login.css'
 
 const Login = () => {
-  const { setUserID, setOpenLogin, setMessage, note } = useContext(AppContext)
+  const { setUserID, singleMovie, setRated, setOpenLogin, setMessage, note } = useContext(AppContext)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const getRateInfo = async (id) => {
+    const isRated = await fetch(`${url}/movierating/${singleMovie.idmovie}/${id}`)
+    setRated(await isRated.text())
+  }
 
   const login = async () => {
     if(!username || !password) return
@@ -25,6 +30,7 @@ const Login = () => {
       } else {
         setUserID(Number(text))
         setOpenLogin(false)
+        singleMovie && getRateInfo(Number(text))
       }
     })
   }

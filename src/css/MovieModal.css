@@ -23,55 +23,54 @@
   margin: 5px 0 5px 0;
 }
 
-.column1 {
+.column1, .column2, .column3, .column4, .column5, .column6, .column7, .column8 {
   display: flex;
   flex-direction: column;
+}
+
+.column3, .column4, .column5, .column6, .column7, .column8 {
+  flex: 1;
+}
+
+.column1  {
   margin: 10px 2.5px 0 0;
   flex: 4;
 }
 
 .column2 {
-  display: flex;
-  flex-direction: column;
   margin: 10px 0 0 2.5px;
   flex: 2;
 }
 
-.column3 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
 .column4 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
   margin-right: 2.5px;
 }
 
 .column5 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
   margin: 0 2.5px 0 2.5px;
 }
 
 .column6 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
   margin: -5px 0 0 2.5px;
+}
+
+.column7 {
+  margin: 0 0 0 2.5px;
+}
+
+.column8 {
+  margin: -5px 0 0 0;
 }
 
 .actors {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .actorBlock {
   background: rgb(100, 100, 100);
   padding: 5px 5px 5px 10px;
-  margin-right: 5px;
+  margin: 0 5px 5px 0;
   color: white;
   border-radius: 2.5px;
 }
@@ -94,6 +93,11 @@
 }
 
 .saveButton {
-  margin-top: 5px;
+  flex: 2;
+  margin: 5px 0 5px 0;
+}
+
+.label {
   flex: 1;
+  margin: 5px 0 5px 0;
 }

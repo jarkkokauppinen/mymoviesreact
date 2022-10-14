@@ -23,6 +23,19 @@ const Header = () => {
     setTitle('')
   }
 
+  const getIn = () => {
+    setOpenLogin(!openLogin.open
+    ? { open: true, form: 'login' }
+    : { open: false })
+  }
+
+  const getOut = () => {
+    setUserID(null)
+    setSingleMovie(null)
+    setMovieList([])
+    setSearch(false)
+  }
+
   return (
     <div className='header'>
       <div className='items'>
@@ -51,13 +64,7 @@ const Header = () => {
           style={{
           background: 'rgb(55, 55, 55)',
           color: 'white' }}
-          onClick={() => !userID
-          ?
-          setOpenLogin(!openLogin.open
-            ? { open: true, form: 'login' }
-            : { open: false })
-          :
-          setUserID(null)}>
+          onClick={() => !userID ? getIn() : getOut()}>
           {!userID ? 'Log in' : 'Log out'}
         </Button>
         

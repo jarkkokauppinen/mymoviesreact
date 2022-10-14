@@ -264,106 +264,110 @@ const MovieModal = () => {
           />
         </div>
 
-      <div className='movierow'>
-        <div className='column4'>
-          <b className='head'>ACTORS</b>
-          <Input
-            placeholder="Actor's firstname"
-            onChange={(event) => setActorFirstname(event.target.value)}
-            value={actorFirstname}
-            maxLength={45}
-          />
-        </div>
+        <div className='movierow'>
+          <div className='column4'>
+            <b className='head'>DIRECTOR</b>
+            <Input
+              placeholder="Director's firstname"
+              onChange={(event) => setDirectorFirstname(event.target.value)}
+              value={directorFirstname}
+              maxLength={45}
+            />
+          </div>
         
-        <div className='column5'>
-          <b className='hidden'>HIDDEN TEXT</b>
-          <Input
-            placeholder="Actor's lastname"
-            onChange={(event) => setActorLastname(event.target.value)}
-            value={actorLastname}
-            maxLength={45}
-          />
-        </div>
+          <div className='column5'>
+            <b className='hidden'>HIDDEN TEXT</b>
+            <Input
+              placeholder="Director's lastname"
+              onChange={(event) => setDirectorLastname(event.target.value)}
+              value={directorLastname}
+              maxLength={45}
+            />
+          </div>
         
-        <div className='column6'>
-          <b className='hidden'>HIDDEN TEXT</b>
-          <div className='addActor' onClick={addActor}>
-            <Icon name='plus'/><b>ADD ACTOR</b>
+          <div className='column6'>
+            <b className='head'>GENRE</b>
+            <Select
+              placeholder={genre === 'genre unknown' ? 'Select genre' : genre}
+              options={genreOptions}
+              onChange={(event) => setGenre(event.target.textContent)}>
+            </Select>
           </div>
         </div>
-      </div>
 
-      <div className='actors'>
-        {movieActors.map((actor, i) =>
-        <div
-          key={i}
-          className='actorBlock'>
-          {actor.firstname} {actor.lastname}
-          <span
-            onClick={() =>
-            setMovieActors(movieActors.filter((_actor, index) => index !== i))}
-            className='xIcon'>
-            <Icon name='x' />
-          </span>
-        </div>)}
-      </div>
+        <div className='movierow'>
+          <div className='column4'>
+            <b className='head'>ACTORS</b>
+            <Input
+              placeholder="Actor's firstname"
+              onChange={(event) => setActorFirstname(event.target.value)}
+              value={actorFirstname}
+              maxLength={45}
+            />
+          </div>
+        
+          <div className='column7'>
+            <b className='hidden'>HIDDEN TEXT</b>
+            <Input
+              placeholder="Actor's lastname"
+              onChange={(event) => setActorLastname(event.target.value)}
+              value={actorLastname}
+              maxLength={45}
+            />
+          </div>
 
-      <div className='movierow'>
-        <div className='column4'>
-          <b className='head'>DIRECTOR</b>
-          <Input
-            placeholder="Director's firstname"
-            onChange={(event) => setDirectorFirstname(event.target.value)}
-            value={directorFirstname}
-            maxLength={45}
-          />
+          <div className='column8'>
+            <b className='hidden'>HIDDEN TEXT</b>
+            <label className='ui button' onClick={addActor}
+              style={{ width: '100%' }}>
+              <i className='ui plus icon'></i> 
+              Add actor
+            </label>
+          </div>
+        </div>
+
+        <div className='actors'>
+          {movieActors.map((actor, i) =>
+          <div
+            key={i}
+            className='actorBlock'>
+            {actor.firstname} {actor.lastname}
+            <span
+              onClick={() =>
+              setMovieActors(movieActors.filter((_actor, index) => index !== i))}
+              className='xIcon'>
+              <Icon name='x' />
+            </span>
+          </div>)}
         </div>
         
-        <div className='column5'>
-          <b className='hidden'>HIDDEN TEXT</b>
-          <Input
-            placeholder="Director's lastname"
-            onChange={(event) => setDirectorLastname(event.target.value)}
-            value={directorLastname}
-            maxLength={45}
-          />
-        </div>
-        
-        <div className='column6'>
-          <b className='head'>GENRE</b>
-          <Select
-            placeholder={genre === 'genre unknown' ? 'Select genre' : genre}
-            options={genreOptions}
-            onChange={(event) => setGenre(event.target.textContent)}>
-          </Select>
-        </div>
-      </div>
+        <div className='movierow'>
+          <div className='saveButton'>
+            <Button
+              onClick={saveMovie}
+              style={{
+                width: '100%',
+                background: 'rgb(0, 180, 150)',
+                color: 'white'
+              }}>SAVE
+            </Button>
+          </div>
 
-      <div style={{ display: 'flex' }}>
-        <div className='saveButton'>
-          <Button
-            onClick={saveMovie}
-            style={{
-              width: '100%',
-              background: 'rgb(0, 180, 150)',
-              color: 'white'
-            }}>SAVE
-          </Button>
-        </div>
+          <input
+            style={{ display: 'none' }}
+            type='file'
+            accept='image/*'
+            id='moviecover'
+            onChange={handleImage}>
+          </input>
 
-        <input
-          style={{ display: 'none' }}
-          type='file'
-          accept='image/*'
-          id='moviecover'
-          onChange={handleImage}>
-        </input>
-
-        <label htmlFor='moviecover' className='ui floated button'
-          style={{ width: 160 }}>
-          <i className='ui upload icon'></i> 
-          Upload image
-        </label>
+          <div className='label'>
+            <label htmlFor='moviecover' className='ui button'
+              style={{ width: '100%' }}>
+              <i className='ui upload icon'></i> 
+              Upload image
+            </label>
+          </div>
         </div>
       </div>
     </Modal>

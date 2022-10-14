@@ -5,7 +5,7 @@ import url from '../url'
 import '../css/SideBar.css'
 
 const SideBar = () => {
-  const { movieList, setSingleMovie, setActors, setRatings, search, setOpenMovieModal, setLoading } = useContext(AppContext)
+  const { userID, movieList, setSingleMovie, setActors, setRatings, setRated, search, setOpenMovieModal, setLoading, setMessage, note } = useContext(AppContext)
 
   const [quote, setQuote] = useState(null)
 
@@ -30,7 +30,24 @@ const SideBar = () => {
     const getRatings = await fetch(`${url}/rating?id=${id}`)
     setRatings(await getRatings.json())
 
+    if (userID) {
+      const isRated = await fetch(`${url}/movierating/${id}/${userID}`)
+      setRated(await isRated.text())
+    }
+
     setLoading(false)
+  }
+
+  const canCreate = () => {
+    setOpenMovieModal({ open: true, form: 'new' })
+  }
+
+  const cannotCreate = () => {
+    setMessage('Log in to add a new movie')
+    note.current.style.display = 'flex'
+    setTimeout(() => {
+      note.current.style.display = 'none'
+    }, 5000)
   }
   
   return (
@@ -73,7 +90,7 @@ const SideBar = () => {
 
         <div className='addButton'>
           <Button
-            onClick={() => setOpenMovieModal({ open: true, form: 'new' })}
+            onClick={() => userID ? canCreate() : cannotCreate()}
             style={{ width: '100%' }}>
             ADD NEW MOVIE
           </Button>

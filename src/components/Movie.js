@@ -6,7 +6,7 @@ import url from '../url'
 import '../css/Movie.css'
 
 const Movie = () => {
-  const { userID, singleMovie, actors, ratings, setOpenRateForm, setOpenMovieModal, loading } = useContext(AppContext)
+  const { userID, setMovieList, singleMovie, setSingleMovie, actors, ratings, rated, setSearch, setOpenRateForm, setOpenMovieModal, loading, setMessage, note } = useContext(AppContext)
 
   if (loading) {
     return (
@@ -18,8 +18,37 @@ const Movie = () => {
     )
   }
 
-  const deleteMovie = () => {
-    console.log('delete')
+  const deleteMovie = async () => {
+    const id = singleMovie.idmovie
+
+    await fetch(`${url}/movie?id=${id}`, { method: 'DELETE' })
+    await fetch(`${url}/movieactor/${id}`, { method: 'DELETE' })
+    await fetch(`${url}/rating?id=${id}`, { method: 'DELETE' })
+    await fetch(`${url}/movierating/${id}`, { method: 'DELETE' })
+
+    setSingleMovie(null)
+    setMovieList([])
+    setSearch(false)
+  }
+
+  const canRate = () => {
+    if (rated === 'true') {
+      setMessage('You have already rated this movie')
+      note.current.style.display = 'flex';
+      setTimeout(() => {
+        note.current.style.display = 'none'
+      }, 5000)
+    } else {
+      setOpenRateForm(true)
+    }
+  }
+
+  const cannotRate = () => {
+    setMessage('Log in to rate')
+    note.current.style.display = 'flex';
+    setTimeout(() => {
+      note.current.style.display = 'none'
+    }, 5000)
   }
   
   return (
@@ -61,7 +90,7 @@ const Movie = () => {
             {singleMovie.genre}
           </div>
 
-          <div className='ratings' onClick={() => setOpenRateForm(true)}>
+          <div className='ratings' onClick={() => !userID ? cannotRate() : canRate()}>
             <Icon name='star' color='yellow' size='large' />
             {ratings.raters === 0
             ?
@@ -91,7 +120,7 @@ const Movie = () => {
 
           <div className='row'>
             <b className='color'>Cast</b>
-            <div className='gray row'>
+            <div className='actorRow'>
               {actors.length > 0
               ?
               actors.map((actor, i) =>
