@@ -6,7 +6,7 @@ import url from '../url'
 import '../css/Movie.css'
 
 const Movie = () => {
-  const { userID, setMovieList, singleMovie, setSingleMovie, actors, ratings, rated, setSearch, setOpenRateForm, setOpenMovieModal, loading, setMessage, note } = useContext(AppContext)
+  const { user, setMovieList, singleMovie, setSingleMovie, actors, ratings, rated, setSearch, setOpenRateForm, setOpenMovieModal, loading, setMessage, note } = useContext(AppContext)
 
   if (loading) {
     return (
@@ -32,7 +32,7 @@ const Movie = () => {
   }
 
   const canRate = () => {
-    if (rated === 'true') {
+    if (rated) {
       setMessage('You have already rated this movie')
       note.current.style.display = 'flex';
       setTimeout(() => {
@@ -63,7 +63,7 @@ const Movie = () => {
             <img className='cover' src={`${url}/images/${singleMovie.image}`} alt='movie'></img>}
           </div>
 
-          {userID === singleMovie.iduser &&
+          {user && user.userID === singleMovie.iduser &&
           <div>
             <Button
               className='editButton'
@@ -90,7 +90,7 @@ const Movie = () => {
             {singleMovie.genre}
           </div>
 
-          <div className='ratings' onClick={() => !userID ? cannotRate() : canRate()}>
+          <div className='ratings' onClick={() => !user ? cannotRate() : canRate()}>
             <Icon name='star' color='yellow' size='large' />
             {ratings.raters === 0
             ?

@@ -1,6 +1,7 @@
 .loginForm {
   text-align: center;
   margin: 0 10px 0 10px;
+  max-width: 240px;
 }
 
 .closeLogin {
@@ -10,6 +11,16 @@
   margin: 10px 10px 0 0;
 }
 
-.input {
-  margin-bottom: 5px;
+.signinput {
+  margin-bottom: 10px;
+}
+
+.error, .er {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.er {
+  max-width: 235px;
 }

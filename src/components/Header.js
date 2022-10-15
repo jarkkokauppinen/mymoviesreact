@@ -5,7 +5,7 @@ import url from '../url'
 import '../css/Header.css'
 
 const Header = () => {
-  const { userID, setUserID, setMovieList, setSingleMovie, setSearch, openLogin, setOpenLogin } = useContext(AppContext)
+  const { user, setUser, setMovieList, setSingleMovie, setSearch, openLogin, setOpenLogin } = useContext(AppContext)
   
   const [title, setTitle] = useState('')
 
@@ -30,10 +30,11 @@ const Header = () => {
   }
 
   const getOut = () => {
-    setUserID(null)
+    setUser(null)
     setSingleMovie(null)
     setMovieList([])
     setSearch(false)
+    localStorage.clear()
   }
 
   return (
@@ -64,8 +65,8 @@ const Header = () => {
           style={{
           background: 'rgb(55, 55, 55)',
           color: 'white' }}
-          onClick={() => !userID ? getIn() : getOut()}>
-          {!userID ? 'Log in' : 'Log out'}
+          onClick={() => !user ? getIn() : getOut()}>
+          {!user ? 'Log in' : 'Log out'}
         </Button>
         
         <Button

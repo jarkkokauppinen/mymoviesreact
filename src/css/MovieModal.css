@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.marginBottom {
+  margin-bottom: 5px;
+}
+
 .head {
   font-size: 16px;
   margin: 5px 0 5px 0;

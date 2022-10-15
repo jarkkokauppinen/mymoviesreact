@@ -1,25 +1,41 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Icon, Input } from 'semantic-ui-react'
 import { AppContext } from '../App'
 import url from '../url'
 import '../css/Login.css'
 
 const Login = () => {
-  const { setUserID, setOpenLogin, setMessage, note } = useContext(AppContext)
+  const { setUser, setOpenLogin } = useContext(AppContext)
+
+  const userError = useRef(null)
 
   const [username, setUsername] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const getUser = async () => {
-    const newUserID = await fetch(`${url}/user/${username}/${password}`)
-    setUserID(Number(await newUserID.text()))
-    setOpenLogin(false)
+  const reset = () => {
+    userError.current.style.display = 'none'
     setUsername('')
     setFirstname('')
     setLastname('')
     setPassword('')
+  }
+
+  useEffect(() => {
+    reset()
+  }, [])
+
+  const getUser = () => {
+    fetch(`${url}/user/${username}/${password}`)
+    .then(response => response.json())
+    .then(newUser => {
+      setUser(newUser)
+      localStorage.setItem('TOKEN', newUser.token)
+      setOpenLogin(false)
+      reset()
+    })
   }
 
   const newAccount = async () => {
@@ -38,37 +54,43 @@ const Login = () => {
     .then(response => response.text())
     .then(text => {
       if (text.startsWith('The')) {
-        setMessage(text)
-        note.current.style.display = 'flex'
-        setTimeout(() => {
-          note.current.style.display = 'none'
-        }, 5000)
-      } else {
-        getUser()
+        setErrorMessage(text)
+        userError.current.style.display = 'flex'
+        return
       }
+      
+      getUser()
     })
   }
   
   return (
     <div className='loginForm'>
       <div
-        onClick={() => setOpenLogin(false)}
+        onClick={() => {
+          setOpenLogin(false)
+          reset()
+        }}
         className='closeLogin'>
         <Icon name='x' />
       </div>
 
       <h2>Sign up</h2>
 
-      <div className='input'>
-        <Input
-          placeholder='Username'
-          onChange={(event) => setUsername(event.target.value)}
-          value={username}
-          size='big'
-        />
+      <Input
+        placeholder='Username'
+        onChange={(event) => setUsername(event.target.value)}
+        value={username}
+        size='big'
+      />
+
+      <div className='error'>
+        <div className='er ui pointing red label'
+          ref={userError}>
+          {errorMessage}
+        </div>
       </div>
 
-      <div className='input'>
+      <div className='signinput'>
         <Input
           placeholder='Firstname'
           onChange={(event) => setFirstname(event.target.value)}
@@ -77,7 +99,7 @@ const Login = () => {
         />
       </div>
 
-      <div className='input'>
+      <div className='signinput'>
         <Input
           placeholder='Lastname'
           onChange={(event) => setLastname(event.target.value)}
@@ -86,7 +108,7 @@ const Login = () => {
         />
       </div>
 
-      <div className='input'>
+      <div className='signinput'>
         <Input
           placeholder='Password'
           onChange={(event) => setPassword(event.target.value)}

@@ -8,7 +8,7 @@ import '../css/Rate.css'
 let chosen = false
 
 const RateModal = () => {
-  const { userID, singleMovie, ratings, setRatings, setRated, openRateForm, setOpenRateForm } = useContext(AppContext)
+  const { user, singleMovie, ratings, setRatings, setRated, openRateForm, setOpenRateForm } = useContext(AppContext)
 
   const refs = useRef([])
 
@@ -67,7 +67,7 @@ const RateModal = () => {
       body: JSON.stringify({
         idrating: `ID${id}`,
         rating: points,
-        iduser: userID
+        iduser: user.userID
       })
     })
 
@@ -91,8 +91,8 @@ const RateModal = () => {
       raters: ratings.raters + 1
     })
 
-    setRated('true')
-
+    chosen = false
+    setRated(true)
     setOpenRateForm(false)
   }
 

@@ -6,7 +6,7 @@ import url from '../url'
 import '../css/MovieModal.css'
 
 const MovieModal = () => {
-  const { userID, singleMovie, setSingleMovie, actors, setActors, setRatings, openMovieModal, setOpenMovieModal, setLoading, setMessage, note } = useContext(AppContext)
+  const { user, singleMovie, setSingleMovie, actors, setActors, setRatings, setRated, openMovieModal, setOpenMovieModal, setLoading, setMessage, note } = useContext(AppContext)
 
   const [title, setTitle] = useState('')
   const [year, setYear] = useState('')
@@ -131,7 +131,7 @@ const MovieModal = () => {
         image: image ? image : 'no',
         iddirector: directorID,
         idgenre: chooseGenre(genre),
-        iduser: userID,
+        iduser: user.userID,
         user: '',
         director_firstname: '',
         director_lastname: '',
@@ -197,6 +197,8 @@ const MovieModal = () => {
     const getRatings = await fetch(`${url}/rating?id=${movieID}`)
     setRatings(await getRatings.json())
 
+    if (openMovieModal.form === 'new') setRated(false)
+
     setLoading(false)
   }
 
@@ -230,6 +232,7 @@ const MovieModal = () => {
           <div className='column1'>
             <b className='head'>TITLE</b>
             <Input
+              className='marginBottom'
               autoFocus={openMovieModal.form === 'new' && true}
               placeholder='Title'
               onChange={(event) =>
@@ -244,6 +247,7 @@ const MovieModal = () => {
           <div className='column2'>
             <b className='head'>YEAR</b>
             <Input
+              className='marginBottom'
               placeholder='Year'
               onChange={(event) => setYear(event.target.value)}
               value={year}
@@ -256,6 +260,7 @@ const MovieModal = () => {
         <div className='column3'>
           <b className='head'>DESCRIPTION</b>
           <Input 
+            className='marginBottom'
             placeholder='Description'
             onChange={(event) => setDescription(event.target.value)}
             value={description}
@@ -268,6 +273,7 @@ const MovieModal = () => {
           <div className='column4'>
             <b className='head'>DIRECTOR</b>
             <Input
+              className='marginBottom'
               placeholder="Director's firstname"
               onChange={(event) => setDirectorFirstname(event.target.value)}
               value={directorFirstname}
@@ -278,6 +284,7 @@ const MovieModal = () => {
           <div className='column5'>
             <b className='hidden'>HIDDEN TEXT</b>
             <Input
+              className='marginBottom'
               placeholder="Director's lastname"
               onChange={(event) => setDirectorLastname(event.target.value)}
               value={directorLastname}
@@ -299,6 +306,7 @@ const MovieModal = () => {
           <div className='column4'>
             <b className='head'>ACTORS</b>
             <Input
+              className='marginBottom'
               placeholder="Actor's firstname"
               onChange={(event) => setActorFirstname(event.target.value)}
               value={actorFirstname}
@@ -309,6 +317,7 @@ const MovieModal = () => {
           <div className='column7'>
             <b className='hidden'>HIDDEN TEXT</b>
             <Input
+              className='marginBottom'
               placeholder="Actor's lastname"
               onChange={(event) => setActorLastname(event.target.value)}
               value={actorLastname}

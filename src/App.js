@@ -9,12 +9,12 @@ import './App.css'
 export const AppContext = createContext()
 
 function App() {
-  const [userID, setUserID] = useState(null)
+  const [user, setUser] = useState(null)
   const [movieList, setMovieList] = useState([])
   const [singleMovie, setSingleMovie] = useState(null)
   const [actors, setActors] = useState([])
   const [ratings, setRatings] = useState(null)
-  const [rated, setRated] = useState('false')
+  const [rated, setRated] = useState(false)
   const [search, setSearch] = useState(false)
   const [openLogin, setOpenLogin] = useState({ open: false, form: 'login' })
   const [openMovieModal, setOpenMovieModal] = useState({ open: false, form: '' })
@@ -37,8 +37,8 @@ function App() {
 
   return (
     <AppContext.Provider value={{
-      userID,
-      setUserID,
+      user,
+      setUser,
       movieList,
       setMovieList,
       singleMovie,
