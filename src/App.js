@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     note.current.style.display = 'none'
   }, [])
-
+  
   return (
     <AppContext.Provider value={{
       user,

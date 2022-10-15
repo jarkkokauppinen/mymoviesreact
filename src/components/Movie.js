@@ -37,18 +37,18 @@ const Movie = () => {
       note.current.style.display = 'flex';
       setTimeout(() => {
         note.current.style.display = 'none'
-      }, 5000)
+      }, 3000)
     } else {
       setOpenRateForm(true)
     }
   }
 
   const cannotRate = () => {
-    setMessage('Log in to rate')
+    setMessage('You must log in to rate')
     note.current.style.display = 'flex';
     setTimeout(() => {
       note.current.style.display = 'none'
-    }, 5000)
+    }, 3000)
   }
   
   return (

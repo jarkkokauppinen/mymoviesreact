@@ -50,7 +50,7 @@ const SideBar = () => {
     note.current.style.display = 'flex'
     setTimeout(() => {
       note.current.style.display = 'none'
-    }, 5000)
+    }, 3000)
   }
   
   return (
