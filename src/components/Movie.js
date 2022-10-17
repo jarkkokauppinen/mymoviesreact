@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
+import { useNavigate } from 'react-router-dom'
 import { Button, Dimmer, Icon, Loader } from 'semantic-ui-react'
 import RateModal from './RateModal'
 import url from '../url'
@@ -7,6 +8,8 @@ import '../css/Movie.css'
 
 const Movie = () => {
   const { user, setMovieList, singleMovie, setSingleMovie, actors, ratings, rated, setSearch, setOpenRateForm, setOpenMovieModal, loading, setMessage, note } = useContext(AppContext)
+
+  const navigate = useNavigate()
 
   if (loading) {
     return (
@@ -29,6 +32,8 @@ const Movie = () => {
     setSingleMovie(null)
     setMovieList([])
     setSearch(false)
+
+    navigate('/')
   }
 
   const canRate = () => {
