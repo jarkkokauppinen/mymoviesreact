@@ -145,7 +145,7 @@ const MovieModal = () => {
       setLoading(false)
       setTimeout(() => {
         note.current.style.display = 'none'
-      }, 5000)
+      }, 3000)
       return
     }
 

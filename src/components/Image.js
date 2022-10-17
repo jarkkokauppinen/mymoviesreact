@@ -3,14 +3,14 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import '../css/Image.css'
 
-import movie1 from '../images/movie1.png'
-import movie2 from '../images/movie2.png'
-import movie3 from '../images/movie3.png'
-import movie4 from '../images/movie4.png'
-import movie5 from '../images/movie5.png'
-import movie6 from '../images/movie6.png'
-import movie7 from '../images/movie7.png'
-import movie8 from '../images/movie8.png'
+import movie1 from '../images/movie1.jpg'
+import movie2 from '../images/movie2.jpg'
+import movie3 from '../images/movie3.jpg'
+import movie4 from '../images/movie4.jpg'
+import movie5 from '../images/movie5.jpg'
+import movie6 from '../images/movie6.jpg'
+import movie7 from '../images/movie7.jpg'
+import movie8 from '../images/movie8.jpg'
 
 const Main = () => {
   const [fader, setFader] = useState(null)

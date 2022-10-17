@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../App'
 import { Button } from 'semantic-ui-react'
 import url from '../url'
@@ -9,6 +10,8 @@ const SideBar = () => {
 
   const [quote, setQuote] = useState(null)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     const getQuote = async () => {
       const result = await fetch(`${url}/quote`)
@@ -18,7 +21,7 @@ const SideBar = () => {
     getQuote()
   }, [])
 
-  const getMovie = async (id) => {
+  const getMovie = async (id, title) => {
     setLoading(true)
 
     const movie = await fetch(`${url}/movie/${id}`)
@@ -37,6 +40,10 @@ const SideBar = () => {
         setRated(Boolean(text))
       })
     }
+
+    const name = title.replaceAll(' ', '')
+
+    navigate(`/movie/${name}`)
 
     setLoading(false)
   }
@@ -67,7 +74,7 @@ const SideBar = () => {
           movieList.map((movie, i) =>
           <li
             key={i}
-            onClick={() => getMovie(movie.idmovie)}>
+            onClick={() => getMovie(movie.idmovie, movie.title)}>
             <span className='link'>{movie.title}</span>
           </li>)
           :
@@ -77,7 +84,8 @@ const SideBar = () => {
           :
           <>
 
-          {quote &&
+          {quote
+          ?
           <>
             <div className='quote'>
               <span>" </span>{quote.quote}<span> "</span>
@@ -86,6 +94,8 @@ const SideBar = () => {
               - {quote.movie} ({quote.year})
             </div>
           </>
+          :
+          <p>loading . . .</p>
           }
           
           </>}

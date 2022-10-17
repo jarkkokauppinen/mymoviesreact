@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../App'
 import { Button } from 'semantic-ui-react'
 import url from '../url'
@@ -9,10 +10,13 @@ const Header = () => {
   
   const [title, setTitle] = useState('')
 
+  const navigate = useNavigate()
+
   const backToMain = () => {
     setMovieList([])
     setSingleMovie(null)
     setSearch(false)
+    navigate('/')
   }
 
   const search = async () => {
@@ -21,6 +25,7 @@ const Header = () => {
     setMovieList(await result.json())
     setSearch(true)
     setTitle('')
+    navigate(`/search/${title}`)
   }
 
   const getIn = () => {
@@ -35,6 +40,7 @@ const Header = () => {
     setMovieList([])
     setSearch(false)
     localStorage.clear()
+    navigate('/')
   }
 
   return (

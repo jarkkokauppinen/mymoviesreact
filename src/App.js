@@ -1,5 +1,4 @@
 import { createContext, useEffect, useRef, useState } from 'react'
-import Header from './components/Header'
 import Main from './components/Main'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
@@ -65,7 +64,6 @@ function App() {
       <div className='base'>
 
         <div className='content'>
-          <Header />
           <Main />
         </div>
         
