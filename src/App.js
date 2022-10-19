@@ -2,7 +2,7 @@ import { createContext, useEffect, useRef, useState } from 'react'
 import Main from './components/Main'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
-import MovieModal from './components/MovieModal'
+// import MovieModal from './components/MovieModal'
 import './App.css'
 
 export const AppContext = createContext()
@@ -75,8 +75,6 @@ function App() {
       <div className='message' ref={note}>
         <div className='ui negative message'>{message}</div>
       </div>
-
-      <MovieModal />
     </AppContext.Provider>
   )
 }

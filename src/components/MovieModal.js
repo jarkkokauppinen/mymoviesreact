@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../App'
 import { v4 as uuid } from 'uuid';
 import { Button, Icon, Input, Modal, Select } from 'semantic-ui-react'
@@ -7,6 +8,8 @@ import '../css/MovieModal.css'
 
 const MovieModal = () => {
   const { user, singleMovie, setSingleMovie, actors, setActors, setRatings, setRated, openMovieModal, setOpenMovieModal, setLoading, setMessage, note } = useContext(AppContext)
+
+  const navigate = useNavigate()
 
   const [title, setTitle] = useState('')
   const [year, setYear] = useState('')
@@ -198,6 +201,10 @@ const MovieModal = () => {
     setRatings(await getRatings.json())
 
     if (openMovieModal.form === 'new') setRated(false)
+
+    const removedGaps = title.replaceAll(' ', '')
+
+    navigate(`/movie/${removedGaps}`)
 
     setLoading(false)
   }

@@ -5,6 +5,7 @@ import Header from './Header'
 import Image from './Image'
 import Movie from './Movie'
 import SideBar from './SideBar'
+import MovieModal from './MovieModal'
 import '../css/Main.css'
 
 const Main = () => {
@@ -49,6 +50,8 @@ const Main = () => {
             </>}>
         </Route>
       </Routes>
+
+      <MovieModal />
     </BrowserRouter>
   )
 }
