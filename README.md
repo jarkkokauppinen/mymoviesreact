@@ -13,6 +13,6 @@ If you don't want to create a new account, feel free to use these credentials :
   <li>password = password</li>
 </ul>
 
-### CI/CD
+### `CI/CD`
 
 A few unit tests are run when the code is pushed to github.
